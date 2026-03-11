@@ -1,205 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Fati</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Fati</title>
 
-<style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-body{
-overflow:hidden;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-font-family:Georgia,serif;
+    body{
+      min-height:100vh;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:"Poppins", sans-serif;
+      background:
+        radial-gradient(circle at top left, #ffdbe8 0%, transparent 28%),
+        radial-gradient(circle at bottom right, #ffc4da 0%, transparent 28%),
+        linear-gradient(135deg, #efb3c4, #e7a9bb, #e8b7c7);
+      position:relative;
+    }
 
-background:
-radial-gradient(circle at top left,#ffd6e7 0%,transparent 30%),
-radial-gradient(circle at bottom right,#ffc1da 0%,transparent 30%),
-linear-gradient(135deg,#f9c5d5,#f6b7cb,#f8cddd);
-}
+    .background-glow{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,255,255,0.26), transparent 18%),
+        radial-gradient(circle at 80% 25%, rgba(255,255,255,0.18), transparent 18%),
+        radial-gradient(circle at 50% 82%, rgba(255,255,255,0.16), transparent 24%);
+      filter:blur(18px);
+    }
 
-.card{
-padding:40px 55px;
-border-radius:30px;
-background:rgba(255,240,246,0.6);
-backdrop-filter:blur(16px);
-border:1px solid rgba(255,255,255,0.6);
-box-shadow:0 15px 40px rgba(172,67,109,0.18);
-text-align:center;
-max-width:90%;
-}
+    .card{
+      position:relative;
+      z-index:3;
+      width:min(92%, 760px);
+      padding:42px 34px;
+      border-radius:32px;
+      background:rgba(255, 236, 243, 0.55);
+      border:1px solid rgba(255,255,255,0.5);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      box-shadow:
+        0 18px 45px rgba(120, 45, 77, 0.14),
+        inset 0 1px 0 rgba(255,255,255,0.55);
+      text-align:center;
+    }
 
-.open-btn{
-border:none;
-padding:15px 25px;
-border-radius:30px;
-font-size:18px;
-cursor:pointer;
-background:white;
-color:#6e2943;
-box-shadow:0 8px 25px rgba(0,0,0,0.15);
-}
+    .open-btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      padding:15px 28px;
+      border-radius:999px;
+      font-size:18px;
+      font-weight:600;
+      font-family:"Poppins", sans-serif;
+      color:#6f2740;
+      background:linear-gradient(135deg, #fff6fa, #ffdce8);
+      box-shadow:0 10px 25px rgba(120, 45, 77, 0.18);
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
 
-.open-btn:hover{
-transform:scale(1.05);
-}
+    .open-btn:hover{
+      transform:scale(1.04);
+      box-shadow:0 14px 30px rgba(120, 45, 77, 0.22);
+    }
 
-.hidden{
-opacity:0;
-transform:translateY(20px);
-transition:all .8s ease;
-}
+    .hidden{
+      display:none;
+    }
 
-.show{
-opacity:1;
-transform:translateY(0);
-}
+    .title{
+      font-size:clamp(2.2rem, 5vw, 4.4rem);
+      color:#68293f;
+      font-weight:700;
+      line-height:1.15;
+      text-shadow:0 4px 12px rgba(255,255,255,0.22);
+    }
 
-h1{
-font-size:3rem;
-color:#5f2438;
-margin-bottom:15px;
-}
+    .fati{
+      font-family:"Great Vibes", cursive;
+      font-size:1.15em;
+      color:#ff4fa3;
+      margin-left:8px;
+      text-shadow:
+        0 0 10px rgba(255, 112, 179, 0.35),
+        0 0 22px rgba(255, 158, 209, 0.22);
+      display:inline-block;
+      transform:translateY(2px);
+    }
 
-.sub{
-font-size:1.2rem;
-color:#8a3c59;
-}
+    .bow{
+      display:inline-block;
+      margin-left:10px;
+    }
 
-.hearts-container{
-position:absolute;
-inset:0;
-pointer-events:none;
-}
+    .sub{
+      margin-top:18px;
+      min-height:64px;
+      font-size:clamp(1rem, 2vw, 1.22rem);
+      color:#8d4562;
+      line-height:1.8;
+      font-weight:500;
+      white-space:pre-wrap;
+    }
 
-.heart{
-position:absolute;
-bottom:-30px;
-font-size:22px;
-animation:rise linear forwards;
-}
+    .sparkle{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.9);
+      box-shadow:0 0 12px rgba(255,255,255,0.95);
+      animation:sparkle 2.7s infinite ease-in-out;
+      pointer-events:none;
+    }
 
-@keyframes rise{
-0%{
-transform:translateY(0);
-opacity:0;
-}
-10%{
-opacity:1;
-}
-100%{
-transform:translateY(-110vh);
-opacity:0;
-}
-}
+    .sparkle:nth-child(1){ top:16%; left:18%; animation-delay:0s; }
+    .sparkle:nth-child(2){ top:21%; left:77%; animation-delay:.7s; }
+    .sparkle:nth-child(3){ top:77%; left:14%; animation-delay:1.4s; }
+    .sparkle:nth-child(4){ top:74%; left:84%; animation-delay:2s; }
 
-</style>
+    .heart{
+      position:absolute;
+      bottom:-40px;
+      z-index:1;
+      pointer-events:none;
+      user-select:none;
+      opacity:.9;
+      animation:rise linear forwards;
+      filter:drop-shadow(0 7px 10px rgba(255, 91, 146, 0.18));
+    }
+
+    .click-heart{
+      position:absolute;
+      z-index:6;
+      pointer-events:none;
+      user-select:none;
+      animation:popUp 1.6s ease-out forwards;
+      filter:drop-shadow(0 7px 10px rgba(255, 91, 146, 0.22));
+    }
+
+    @keyframes rise{
+      0%{
+        transform:translateY(0) scale(.8) rotate(0deg);
+        opacity:0;
+      }
+      10%{
+        opacity:1;
+      }
+      100%{
+        transform:translateY(-115vh) scale(1.25) rotate(18deg);
+        opacity:0;
+      }
+    }
+
+    @keyframes popUp{
+      0%{
+        transform:translate(-50%,-50%) scale(.35);
+        opacity:1;
+      }
+      100%{
+        transform:translate(-50%,-180px) scale(1.7) rotate(18deg);
+        opacity:0;
+      }
+    }
+
+    @keyframes sparkle{
+      0%,100%{
+        transform:scale(.7);
+        opacity:.3;
+      }
+      50%{
+        transform:scale(1.3);
+        opacity:1;
+      }
+    }
+
+    @media (max-width:600px){
+      .card{
+        padding:30px 22px;
+        border-radius:26px;
+      }
+
+      .open-btn{
+        font-size:16px;
+        padding:13px 22px;
+      }
+
+      .sub{
+        min-height:72px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<audio id="bgMusic" loop>
-<source src="air.mp4" type="audio/mp4">
-</audio>
+  <audio id="bgMusic" preload="auto">
+    <source src="air.mp4" type="audio/mp4">
+  </audio>
 
-<div class="hearts-container" id="hearts"></div>
+  <div class="background-glow"></div>
 
-<div class="card">
+  <div class="sparkle"></div>
+  <div class="sparkle"></div>
+  <div class="sparkle"></div>
+  <div class="sparkle"></div>
 
-<button id="openBtn" class="open-btn">
-✨ Open your surprise
-</button>
+  <div class="card">
+    <button id="openBtn" class="open-btn">✨ Open your surprise</button>
 
-<div id="surprise" class="hidden">
+    <div id="surpriseBox" class="hidden">
+      <h1 class="title">
+        Happy Birthday
+        <span class="fati">Fati</span>
+        <span class="bow">🎀</span>
+      </h1>
 
-<h1>Happy Birthday Fati 🎀</h1>
+      <p id="typedText" class="sub"></p>
+    </div>
+  </div>
 
-<p id="message" class="sub"></p>
+  <script>
+    const openBtn = document.getElementById("openBtn");
+    const surpriseBox = document.getElementById("surpriseBox");
+    const typedText = document.getElementById("typedText");
+    const bgMusic = document.getElementById("bgMusic");
 
-</div>
+    const floatingHearts = ["💖","💗","💘","💕","💓","💞","💝","🩷","❤️"];
+    const clickHearts = ["💖","💘","💕","💗","💓","🩷","❤️","💞"];
 
-</div>
+    const message = "hadi surprise sghira 🎂\ntmanit lik nhar zwin w 3am sa3id 🎉";
 
-<script>
+    let surpriseOpened = false;
 
-const btn = document.getElementById("openBtn")
-const surprise = document.getElementById("surprise")
-const msg = document.getElementById("message")
-const music = document.getElementById("bgMusic")
+    function createFloatingHeart(){
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = floatingHearts[Math.floor(Math.random() * floatingHearts.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (18 + Math.random() * 24) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+      heart.style.opacity = 0.45 + Math.random() * 0.55;
+      document.body.appendChild(heart);
 
-const text =
-"hadi surprise sghira 🎂 tmanit lik nhar zwin w 3am sa3id 🎉"
+      setTimeout(() => {
+        heart.remove();
+      }, 8500);
+    }
 
-btn.onclick = ()=>{
+    setInterval(createFloatingHeart, 320);
 
-btn.style.display="none"
+    function createClickHearts(x, y, count = 10){
+      for(let i = 0; i < count; i++){
+        const heart = document.createElement("div");
+        heart.className = "click-heart";
+        heart.innerHTML = clickHearts[Math.floor(Math.random() * clickHearts.length)];
+        heart.style.left = (x + (Math.random() * 90 - 45)) + "px";
+        heart.style.top = (y + (Math.random() * 34 - 17)) + "px";
+        heart.style.fontSize = (18 + Math.random() * 18) + "px";
+        heart.style.animationDuration = (1.1 + Math.random() * 0.7) + "s";
+        document.body.appendChild(heart);
 
-surprise.classList.add("show")
+        setTimeout(() => {
+          heart.remove();
+        }, 1800);
+      }
+    }
 
-music.volume=0
-music.play()
+    function typeMessage(text){
+      typedText.textContent = "";
+      let i = 0;
 
-let v=0
+      function type(){
+        if(i < text.length){
+          typedText.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 40);
+        }
+      }
 
-let fade=setInterval(()=>{
-if(v<0.5){
-v+=0.02
-music.volume=v
-}else{
-clearInterval(fade)
-}
-},200)
+      type();
+    }
 
-let i=0
+    function playMusicWithFade(){
+      bgMusic.volume = 0;
+      bgMusic.play().catch(() => {});
 
-function type(){
-if(i<text.length){
-msg.innerHTML+=text.charAt(i)
-i++
-setTimeout(type,40)
-}
-}
+      let volume = 0;
+      const fade = setInterval(() => {
+        if(volume < 0.5){
+          volume += 0.02;
+          bgMusic.volume = volume;
+        } else {
+          clearInterval(fade);
+        }
+      }, 200);
+    }
 
-type()
+    openBtn.addEventListener("click", function(e){
+      e.stopPropagation();
 
-}
+      if(surpriseOpened) return;
+      surpriseOpened = true;
 
-const heartsContainer=document.getElementById("hearts")
+      openBtn.style.display = "none";
+      surpriseBox.classList.remove("hidden");
 
-function heart(){
+      createClickHearts(window.innerWidth / 2, window.innerHeight / 2, 18);
+      typeMessage(message);
+      playMusicWithFade();
+    });
 
-let h=document.createElement("div")
-
-h.className="heart"
-
-h.innerHTML="💖"
-
-h.style.left=Math.random()*100+"vw"
-
-h.style.fontSize=(20+Math.random()*20)+"px"
-
-h.style.animationDuration=(4+Math.random()*3)+"s"
-
-heartsContainer.appendChild(h)
-
-setTimeout(()=>{
-h.remove()
-},7000)
-
-}
-
-setInterval(heart,400)
-
-</script>
+    document.addEventListener("click", function(e){
+      createClickHearts(e.clientX, e.clientY, 8);
+    });
+  </script>
 
 </body>
 </html>
