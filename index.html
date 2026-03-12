@@ -141,17 +141,21 @@
     }
 
     .sub{
-      margin-top:16px;
-      min-height:72px;
-      max-width:210px;
-      font-size:clamp(.92rem, 3.7vw, 1rem);
-      color:#91506a;
-      line-height:1.7;
-      font-weight:500;
-      white-space:pre-wrap;
-      margin-left:auto;
-      margin-right:auto;
-    }
+  margin-top:16px;
+  min-height:72px;
+  max-width:210px;
+  font-size:clamp(.85rem, 3.5vw, .95rem);
+  color:#91506a;
+  line-height:1.7;
+  font-weight:500;
+  white-space:pre-wrap;
+  margin-left:auto;
+  margin-right:auto;
+
+  text-shadow:
+  0 0 3px #ffffff,
+  0 0 6px #ffffff;
+}
 
     .heart{
       position:fixed;
@@ -280,7 +284,9 @@
     </div>
   </div>
 
-  <img id="happyCat" src="happy-cat.gif" class="happy-cat">
+  <video id="happyCat" class="happy-cat" autoplay loop muted playsinline>
+  <source src="happy-cat.mp4" type="video/mp4">
+</video>
 
   <script>
     const openBtn = document.getElementById("openBtn");
@@ -382,3 +388,4 @@
 
 </body>
 </html>
+
