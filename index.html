@@ -19,9 +19,6 @@
     body{
       min-height:100vh;
       overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
       font-family:"Poppins", sans-serif;
       background:url("bg.jpg") center center / cover no-repeat;
       position:relative;
@@ -31,9 +28,26 @@
       content:"";
       position:absolute;
       inset:0;
-      background:rgba(255, 220, 232, 0.12);
-      pointer-events:none;
+      background:rgba(255, 220, 232, 0.10);
       z-index:0;
+      pointer-events:none;
+    }
+
+    .site{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      z-index:2;
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .9s ease;
+    }
+
+    .site.show{
+      opacity:1;
+      visibility:visible;
     }
 
     .background-glow{
@@ -41,9 +55,9 @@
       inset:0;
       pointer-events:none;
       background:
-        radial-gradient(circle at 15% 18%, rgba(255,255,255,0.15), transparent 18%),
-        radial-gradient(circle at 84% 20%, rgba(255,255,255,0.12), transparent 18%),
-        radial-gradient(circle at 50% 84%, rgba(255,255,255,0.1), transparent 24%);
+        radial-gradient(circle at 15% 18%, rgba(255,255,255,0.14), transparent 18%),
+        radial-gradient(circle at 84% 20%, rgba(255,255,255,0.1), transparent 18%),
+        radial-gradient(circle at 50% 84%, rgba(255,255,255,0.08), transparent 24%);
       filter:blur(16px);
       z-index:1;
     }
@@ -70,49 +84,26 @@
       z-index:4;
       width:min(90vw, 340px);
       height:min(78vh, 500px);
-      background:url("card.png") center center / contain no-repeat;
       display:flex;
       align-items:center;
       justify-content:center;
     }
 
-    .card-content{
+    .card-img{
       width:100%;
-      height:100%;
+      height:auto;
+      display:block;
+    }
+
+    .card-content{
+      position:absolute;
+      inset:0;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:flex-start;
       text-align:center;
-      padding:
-        150px   /* top */
-        42px    /* right */
-        120px   /* bottom */
-        42px;   /* left */
-    }
-
-    .open-btn{
-      border:none;
-      outline:none;
-      cursor:pointer;
-      padding:13px 20px;
-      border-radius:999px;
-      font-size:15px;
-      font-weight:600;
-      font-family:"Poppins", sans-serif;
-      color:#7a3750;
-      background:rgba(255, 243, 247, 0.96);
-      box-shadow:0 10px 22px rgba(120, 45, 77, 0.16);
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-
-    .open-btn:hover{
-      transform:scale(1.04);
-      box-shadow:0 14px 28px rgba(120, 45, 77, 0.22);
-    }
-
-    .hidden{
-      display:none;
+      padding:150px 42px 120px 42px;
     }
 
     .title{
@@ -141,21 +132,24 @@
     }
 
     .sub{
-  margin-top:16px;
-  min-height:72px;
-  max-width:210px;
-  font-size:clamp(.85rem, 3.5vw, .95rem);
-  color:#91506a;
-  line-height:1.7;
-  font-weight:500;
-  white-space:pre-wrap;
-  margin-left:auto;
-  margin-right:auto;
+      margin-top:16px;
+      min-height:72px;
+      max-width:210px;
+      font-size:clamp(.85rem, 3.5vw, .95rem);
+      color:#91506a;
+      line-height:1.7;
+      font-weight:500;
+      white-space:pre-wrap;
+      margin-left:auto;
+      margin-right:auto;
+      text-shadow:
+        0 0 3px #ffffff,
+        0 0 6px #ffffff;
+    }
 
-  text-shadow:
-  0 0 3px #ffffff,
-  0 0 6px #ffffff;
-}
+    .hidden{
+      display:none;
+    }
 
     .heart{
       position:fixed;
@@ -179,13 +173,127 @@
 
     .happy-cat{
       position:fixed;
-      bottom:18px;
+      bottom:14px;
       left:50%;
       transform:translateX(-50%);
-      width:min(28vw, 110px);
+      width:min(28vw, 100px);
       z-index:7;
       display:none;
       pointer-events:none;
+    }
+
+    /* INTRO PINK */
+    .intro-screen{
+      position:fixed;
+      inset:0;
+      background:linear-gradient(180deg, #f7bfd4, #f4aac7, #ef9ec0);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:50;
+      overflow:hidden;
+      transition:opacity .9s ease, visibility .9s ease;
+    }
+
+    .intro-screen.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .star-wrap{
+      position:relative;
+      width:190px;
+      height:190px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:26px;
+    }
+
+    .star{
+      width:115px;
+      height:115px;
+      background:#fff7fb;
+      clip-path:polygon(
+        50% 0%,
+        63% 37%,
+        100% 50%,
+        63% 63%,
+        50% 100%,
+        37% 63%,
+        0% 50%,
+        37% 37%
+      );
+      box-shadow:
+        0 0 18px rgba(255,255,255,0.45),
+        0 0 50px rgba(255,220,240,0.30);
+      animation:starPulse 2s ease-in-out infinite;
+      transition:transform .8s ease, opacity .8s ease;
+    }
+
+    .star.expand{
+      transform:scale(8);
+      opacity:0;
+    }
+
+    .intro-title{
+      color:#fff8fc;
+      font-size:21px;
+      font-weight:700;
+      text-align:center;
+      margin-bottom:16px;
+      text-shadow:0 0 16px rgba(255,255,255,0.20);
+      transition:opacity .5s ease;
+    }
+
+    .intro-message{
+      color:#fff8fc;
+      font-size:16px;
+      font-weight:500;
+      text-align:center;
+      margin-bottom:20px;
+      opacity:0;
+      transform:translateY(8px);
+      transition:opacity .5s ease, transform .5s ease;
+      text-shadow:0 0 14px rgba(255,255,255,0.18);
+    }
+
+    .intro-message.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    .open-btn{
+      border:none;
+      outline:none;
+      cursor:pointer;
+      padding:14px 24px;
+      border-radius:999px;
+      font-size:16px;
+      font-weight:600;
+      font-family:"Poppins", sans-serif;
+      color:#a03f67;
+      background:#fff5fa;
+      box-shadow:0 10px 24px rgba(120, 45, 77, 0.18);
+      transition:transform .2s ease, box-shadow .2s ease, opacity .4s ease;
+    }
+
+    .open-btn:hover{
+      transform:scale(1.04);
+      box-shadow:0 14px 28px rgba(120, 45, 77, 0.24);
+    }
+
+    @keyframes starPulse{
+      0%,100%{
+        transform:scale(.92);
+        opacity:.9;
+      }
+      50%{
+        transform:scale(1.08);
+        opacity:1;
+      }
     }
 
     @keyframes rise{
@@ -231,7 +339,7 @@
       }
 
       .card-content{
-        padding: 145px 36px 115px 36px;
+        padding:145px 36px 115px 36px;
       }
 
       .title{
@@ -249,8 +357,26 @@
       }
 
       .happy-cat{
+        width:90px;
+        bottom:10px;
+      }
+
+      .star-wrap{
+        width:150px;
+        height:150px;
+      }
+
+      .star{
         width:100px;
-        bottom:14px;
+        height:100px;
+      }
+
+      .intro-title{
+        font-size:18px;
+      }
+
+      .intro-message{
+        font-size:14px;
       }
     }
   </style>
@@ -261,18 +387,29 @@
     <source src="air.mp4" type="audio/mp4">
   </audio>
 
-  <div class="background-glow"></div>
+  <!-- INTRO -->
+  <div id="introScreen" class="intro-screen">
+    <div class="star-wrap">
+      <div id="introStar" class="star"></div>
+    </div>
+    <div class="intro-title">A little surprise for you ✨</div>
+    <div id="introMessage" class="intro-message">ready? 💖</div>
+    <button id="openBtn" class="open-btn">Open your surprise</button>
+  </div>
 
-  <div class="sparkle"></div>
-  <div class="sparkle"></div>
-  <div class="sparkle"></div>
-  <div class="sparkle"></div>
+  <!-- SITE -->
+  <div id="site" class="site">
+    <div class="background-glow"></div>
 
-  <div class="card">
-    <div class="card-content">
-      <button id="openBtn" class="open-btn">✨ Open your surprise</button>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
+    <div class="sparkle"></div>
 
-      <div id="surpriseBox" class="hidden">
+    <div class="card">
+      <img src="card.png" class="card-img" alt="card">
+
+      <div id="surpriseBox" class="card-content hidden">
         <h1 class="title">
           Happy Birthday
           <span class="fati">Fati</span>
@@ -284,12 +421,14 @@
     </div>
   </div>
 
-  <video id="happyCat" class="happy-cat" autoplay loop muted playsinline>
-  <source src="happy-cat.mp4" type="video/mp4">
-</video>
+  <img id="happyCat" src="happy-cat.gif" class="happy-cat">
 
   <script>
     const openBtn = document.getElementById("openBtn");
+    const introScreen = document.getElementById("introScreen");
+    const introStar = document.getElementById("introStar");
+    const introMessage = document.getElementById("introMessage");
+    const site = document.getElementById("site");
     const surpriseBox = document.getElementById("surpriseBox");
     const typedText = document.getElementById("typedText");
     const bgMusic = document.getElementById("bgMusic");
@@ -372,20 +511,26 @@
       if(surpriseOpened) return;
       surpriseOpened = true;
 
-      openBtn.style.display = "none";
-      surpriseBox.classList.remove("hidden");
-      happyCat.style.display = "block";
+      openBtn.style.opacity = "0";
+      introMessage.classList.add("show");
+      introStar.classList.add("expand");
 
-      createClickHearts(window.innerWidth / 2, window.innerHeight / 2, 14);
-      typeMessage(message);
-      playMusicWithFade();
+      setTimeout(() => {
+        introScreen.classList.add("hide");
+        site.classList.add("show");
+        surpriseBox.classList.remove("hidden");
+        happyCat.style.display = "block";
+        createClickHearts(window.innerWidth / 2, window.innerHeight / 2, 14);
+        typeMessage(message);
+        playMusicWithFade();
+      }, 850);
     });
 
     document.addEventListener("click", function(e){
+      if(!surpriseOpened) return;
       createClickHearts(e.clientX, e.clientY, 5);
     });
   </script>
 
 </body>
 </html>
-
